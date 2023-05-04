@@ -28,8 +28,6 @@ Put the pair training images into ./dataset, and changes the option "--patch_low
 python train.py --gpu YOUR_DEVICE
 ```
 
-### Dataset
-EUVP 
 
 ## Citation
 
