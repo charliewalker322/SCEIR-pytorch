@@ -2,7 +2,7 @@
 This is an official pytorch implement of "Atmospheric Scattering Model Induced Statistical Characteristics Estimation
 for Underwater Image Restoration".
 
-<img src="comparison4.png"/>
+<img src="comparison4_2.png"/>
 
 ## Requirements
 We implement the experiments in the following environment.
@@ -27,6 +27,9 @@ Put the pair training images into ./dataset, and changes the option "--patch_low
 ```
 python train.py --gpu YOUR_DEVICE
 ```
+
+### Dataset
+EUVP 
 
 ## Citation
 
