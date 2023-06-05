@@ -71,7 +71,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Configure')
     # training config
     parser.add_argument('--gpu', type=str, default='0')   # set -1 to use cpu
-    parser.add_argument('--size', type=int, default=512)    # size of SCE input img
     parser.add_argument('--downsample', type=float, default=1.0)    # whether to use downsample in the range (0,1]
     parser.add_argument('--load_model', type=str, default='./checkpoint/model.pthep145')   # checkpoint path
     parser.add_argument('--save_extra', action='store_true', default=False) # whether to save contrast/global images

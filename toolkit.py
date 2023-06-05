@@ -6,12 +6,13 @@ import glob
 from torch.nn.functional import interpolate
 import os
 
-class PatchLoading(Dataset):
+
+class TrainLoading(Dataset):
     def __init__(self, opts):
         self.opts = opts
         self.toTensor = transforms.ToTensor()
-        self.files_low = sorted( glob.glob(os.path.join(opts.patch_low, '*.*g')) )
-        self.files_high = sorted( glob.glob(os.path.join(opts.patch_high, '*.*g')) )
+        self.files_low = sorted( glob.glob(os.path.join(opts.train_raw, '*.*g')) )
+        self.files_high = sorted( glob.glob(os.path.join(opts.train_ref, '*.*g')) )
 
     def __getitem__(self, index):
         patch_low = self.toTensor(Image.open(self.files_low[index % len(self.files_low)]))
@@ -37,8 +38,8 @@ class EvalLoading():
         self.opts = opts
         self.resize = resize
         self.toTensor = transforms.ToTensor()
-        self.files_low = sorted( glob.glob(os.path.join(opts.patch_low, '*.*g')) )
-        self.files_high = sorted( glob.glob(os.path.join(opts.patch_high, '*.*g')) )
+        self.files_low = sorted( glob.glob(os.path.join(opts.eval_raw, '*.*g')) )
+        self.files_high = sorted( glob.glob(os.path.join(opts.eval_ref, '*.*g')) )
 
     def __getitem__(self, index):
         patch_low = self.toTensor(Image.open(self.files_low[index])).unsqueeze(0)

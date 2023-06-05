@@ -81,8 +81,6 @@ class SCEIR_Model(nn.Module):
 def eval(model, opts, epoch, dataloader):
     print("Evaling the " + str(epoch) + " epoch")
     metric = {}
-    if not os.path.exists(os.path.join(opts.saving_eval_dir, "contrast")):
-        os.makedirs(os.path.join(opts.saving_eval_dir, "contrast"))
 
     for iteration, data in enumerate(tqdm(dataloader)):
         data = getData_hsv(data, opts, mode='train')
@@ -105,15 +103,11 @@ def eval(model, opts, epoch, dataloader):
 
         ################## save contrast-output-img
         img = torch.cat( [ data['raw'], ain_out, output, data['ref'] ], dim=0 )
-        img_path = os.path.join(opts.saving_eval_dir, "img")
-        if not os.path.exists(img_path):
-            os.makedirs(img_path)
-        save_TensorImg(img, path=os.path.join(img_path, "{}_epoch{}.png".format(data['name'], epoch)), nrow=img.size(0))
+        con_path = os.path.join(opts.saving_eval_dir, "contrast")
+        save_TensorImg(img, path=os.path.join(con_path, "{}_epoch{}.png".format(data['name'], epoch)), nrow=img.size(0))
 
         # save output
         img_path = os.path.join(opts.saving_eval_dir, "output")
-        if not os.path.exists(img_path):
-            os.makedirs(img_path)
         output_path = os.path.join(img_path, "{}_epoch{}.png".format(data['name'], epoch))
         save_TensorImg(output, path=output_path)
 
@@ -190,6 +184,10 @@ def run(model, opts):
     model_path = os.path.join( opts.model_path, 'model', opts.loss)
     opts.saving_eval_dir = os.path.join(opts.saving_eval_dir, 'eval', opts.loss)
 
+    if not os.path.exists(os.path.join(opts.saving_eval_dir, "contrast")):
+        os.makedirs(os.path.join(opts.saving_eval_dir, "contrast"))
+    if not os.path.exists(os.path.join(opts.saving_eval_dir, "output")):
+        os.makedirs(os.path.join(opts.saving_eval_dir, "output"))
 
     if not os.path.exists(model_path):
         os.makedirs(model_path)
@@ -221,7 +219,7 @@ if __name__ == "__main__":
     # training config
     parser.add_argument('--gpu', type=str, default='0')   # set -1 to use cpu
     parser.add_argument('--batch_size', type=int, default=4)
-    parser.add_argument('--size', type=int, default=512)    # size of SCE input img
+    parser.add_argument('--size', type=int, default=512)    # size of input images
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--weight_decay', type=float, default=0)
 
