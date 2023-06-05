@@ -1,7 +1,7 @@
 # Statistical Characteristics Estimation for Underwater Image Restoration (SCEIR) SPL2023
 This is an official pytorch implement of SCEIR:
 
-"Atmospheric Scattering Model Induced Statistical Characteristics Estimation for Underwater Image Restoration" [Paper](https://arxiv.org/pdf/2109.05923.pdf)
+"Atmospheric Scattering Model Induced Statistical Characteristics Estimation for Underwater Image Restoration" [Paper](https://ieeexplore.ieee.org/abstract/document/10138650)
 
 <img src="comparison4_2.png" width="800px">
 
